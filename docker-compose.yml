@@ -1,0 +1,13 @@
+services:
+  webapirest:
+    image: ${DOCKER_REGISTRY-}webapirest
+    build:
+      context: .
+      dockerfile: WebApiRest/Dockerfile
+
+  grpcserviceserver:
+    image: ${DOCKER_REGISTRY-}grpcserviceserver
+    build:
+      context: .
+      dockerfile: GrpcServiceServer/Dockerfile
+
