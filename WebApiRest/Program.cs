@@ -19,8 +19,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-int i = 0;
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/weatherforecast/{i}", (int i) =>
 {
     if (i > 0 && i % 50000 == 0)
         Console.WriteLine($"Received {i} requests:{DateTime.Now:HH:mm:ss}");
@@ -33,7 +32,6 @@ app.MapGet("/weatherforecast", () =>
             summaries[Random.Shared.Next(summaries.Length)]
         ))
         .ToArray();
-    i++;
     return forecast;
 })
 .WithName("GetWeatherForecast");
