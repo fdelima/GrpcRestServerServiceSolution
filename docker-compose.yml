@@ -1,7 +1,7 @@
 name: grpc-rest-solution
 
 services:
-  webapirest:
+  restserviceserver:
     image: ${DOCKER_REGISTRY-}webapirest
     build:
       context: .

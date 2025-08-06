@@ -13,8 +13,8 @@ namespace GrpcServiceServer.Services
 
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
         {
-            if (int.Parse(request.Count) > 0 && int.Parse(request.Count) % 100000 == 0)
-                Console.WriteLine($"Received 100000 requests:{DateTime.Now:HHmmss}");
+            if (int.Parse(request.Count) > 0 && int.Parse(request.Count) % 50000 == 0)
+                Console.WriteLine($"Received {request.Count} requests:{DateTime.Now:HH:mm:ss}");
             //_logger.LogInformation("Received request to say hello to {Name}", request.Name);
 
             return Task.FromResult(new HelloReply

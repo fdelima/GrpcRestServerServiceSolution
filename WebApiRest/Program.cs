@@ -22,8 +22,8 @@ var summaries = new[]
 int i = 0;
 app.MapGet("/weatherforecast", () =>
 {
-    if (i > 0 && i % 100000 == 0)
-        Console.WriteLine($"Received 100000 requests:{DateTime.Now:HHmmss}");
+    if (i > 0 && i % 50000 == 0)
+        Console.WriteLine($"Received {i} requests:{DateTime.Now:HH:mm:ss}");
 
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
