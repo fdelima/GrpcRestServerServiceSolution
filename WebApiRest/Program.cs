@@ -12,7 +12,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 var summaries = new[]
 {
@@ -22,7 +22,8 @@ var summaries = new[]
 int i = 0;
 app.MapGet("/weatherforecast", () =>
 {
-    Console.WriteLine($"Received request::{i}");
+    if (i > 0 && i % 100000 == 0)
+        Console.WriteLine($"Received 100000 requests:{DateTime.Now:HHmmss}");
 
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
