@@ -1,3 +1,5 @@
+using Prometheus.Client.MetricServer;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -35,6 +37,18 @@ app.MapGet("/weatherforecast/{i}", (int i) =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+// Observabilidade :: Métricas
+var options = new MetricServerOptions
+{
+    Port = 9091,
+    MapPath = "/metrics",
+    MetricPrefixName = "restserviceserver_"
+};
+
+var metricServer = new MetricServer(options);
+metricServer.Start();
+
 
 app.Run();
 

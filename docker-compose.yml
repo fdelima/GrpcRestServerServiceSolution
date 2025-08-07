@@ -6,18 +6,9 @@ services:
     build:
       context: .
       dockerfile: WebApiRest/Dockerfile
-    # networks:
-    #   - POC-GrpcRest
 
   grpcserviceserver:
     image: ${DOCKER_REGISTRY-}grpcserviceserver
     build:
       context: .
       dockerfile: GrpcServiceServer/Dockerfile
-#     networks:
-#       - POC-GrpcRest
-
-# networks:
-#   POC-GrpcRest:
-#     driver: bridge
-

@@ -1,4 +1,6 @@
 using GrpcServiceServer.Services;
+using Prometheus.Client;
+using Prometheus.Client.MetricServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,5 +13,16 @@ var app = builder.Build();
 app.MapGrpcService<GreeterService>();
 app.MapGet("/", () => "humnnn! grpc on-line");
 //app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+
+// Observabilidade :: Métricas
+var options = new MetricServerOptions
+{
+    Port = 9091,
+    MapPath = "/metrics",
+    MetricPrefixName = "restserviceserver_"
+};
+
+var metricServer = new MetricServer(options);
+metricServer.Start();
 
 app.Run();
