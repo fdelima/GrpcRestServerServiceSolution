@@ -2,22 +2,13 @@ name: grpc-rest-solution
 
 services:
   restserviceserver:
-    image: ${DOCKER_REGISTRY-}webapirest
+    image: ${DOCKER_REGISTRY-}restserviceserver:docker
     build:
       context: .
       dockerfile: WebApiRest/Dockerfile
-    # networks:
-    #   - POC-GrpcRest
 
   grpcserviceserver:
-    image: ${DOCKER_REGISTRY-}grpcserviceserver
+    image: ${DOCKER_REGISTRY-}grpcserviceserver:docker
     build:
       context: .
       dockerfile: GrpcServiceServer/Dockerfile
-#     networks:
-#       - POC-GrpcRest
-
-# networks:
-#   POC-GrpcRest:
-#     driver: bridge
-
