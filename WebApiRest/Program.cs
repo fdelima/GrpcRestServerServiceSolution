@@ -1,3 +1,4 @@
+using Prometheus.Client;
 using Prometheus.Client.MetricServer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,9 +22,27 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
+// Observabilidade :: Métricas
+var options = new MetricServerOptions
+{
+    Port = 9092,
+    MapPath = "/metrics",
+    MetricPrefixName = "restserviceserver_"
+};
+
+var metricServer = new MetricServer(options);
+metricServer.Start();
+
+ICounter _requestsCounter;
+_requestsCounter = Metrics
+                      .DefaultFactory
+                      .CreateCounter("grpcserviceserver_requests_total", "Numero total de requisicoes.");
+
 app.MapGet("/weatherforecast/{i}", (int i) =>
 {
-    if (i > 0 && i % 50000 == 0)
+    _requestsCounter.Inc(); // Incrementa em 1
+
+    if (i > 1 && i % 50000 == 0)
         Console.WriteLine($"Received {i} requests:{DateTime.Now:HH:mm:ss}");
 
     var forecast = Enumerable.Range(1, 5).Select(index =>
@@ -37,18 +56,6 @@ app.MapGet("/weatherforecast/{i}", (int i) =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
-
-// Observabilidade :: Métricas
-var options = new MetricServerOptions
-{
-    Port = 9092,
-    MapPath = "/metrics",
-    MetricPrefixName = "restserviceserver_"
-};
-
-var metricServer = new MetricServer(options);
-metricServer.Start();
-
 
 app.Run();
 
