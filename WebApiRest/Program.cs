@@ -41,7 +41,7 @@ app.MapGet("/weatherforecast/{i}", (int i) =>
 // Observabilidade :: Métricas
 var options = new MetricServerOptions
 {
-    Port = 9091,
+    Port = 9092,
     MapPath = "/metrics",
     MetricPrefixName = "restserviceserver_"
 };

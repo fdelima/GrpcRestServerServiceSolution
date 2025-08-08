@@ -1,5 +1,4 @@
 using GrpcServiceServer.Services;
-using Prometheus.Client;
 using Prometheus.Client.MetricServer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +17,7 @@ var options = new MetricServerOptions
 {
     Port = 9091,
     MapPath = "/metrics",
-    MetricPrefixName = "restserviceserver_"
+    MetricPrefixName = "grpcserviceserver_"
 };
 
 var metricServer = new MetricServer(options);

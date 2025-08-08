@@ -1,6 +1,5 @@
 using Grpc.Core;
 using Prometheus.Client;
-using System.Diagnostics.Metrics;
 
 namespace GrpcServiceServer.Services
 {
