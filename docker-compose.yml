@@ -12,10 +12,3 @@ services:
     build:
       context: .
       dockerfile: GrpcServiceServer/Dockerfile
-#     networks:
-#       - POC-GrpcRest
-
-# networks:
-#   POC-GrpcRest:
-#     driver: bridge
-
