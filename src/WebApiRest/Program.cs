@@ -41,7 +41,7 @@ app.MapGet("/weatherforecast/{i}", (int i) =>
 {
     _requestsCounter.Inc(); // Incrementa em 1
 
-    if (i > 1 && i % 5000 == 0)
+    if (i > 1 && i % 50000 == 0)
         Console.WriteLine($"Received {i} requests:{DateTime.Now:HH:mm:ss}");
 
     var forecast = Enumerable.Range(1, 5).Select(index =>
