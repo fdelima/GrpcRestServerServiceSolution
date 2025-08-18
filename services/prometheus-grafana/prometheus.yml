@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 1s
+
+scrape_configs:
+  - job_name: 'grpc'
+    static_configs:
+      - targets: ['grpcserviceserver:9091']
+  - job_name: 'rest'
+    static_configs:
+      - targets: ['restserviceserver:9092']

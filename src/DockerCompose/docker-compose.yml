@@ -1,0 +1,13 @@
+name: grpc-rest-solution
+
+services:
+  grpcserviceserver:
+    image: ${DOCKER_REGISTRY-}grpcserviceserver:prometheus
+    build:
+      context: ..
+      dockerfile: GrpcServiceServer/Dockerfile
+  restserviceserver:
+    image: ${DOCKER_REGISTRY-}restserviceserver:prometheus
+    build:
+      context: ..
+      dockerfile: WebApiRest/Dockerfile

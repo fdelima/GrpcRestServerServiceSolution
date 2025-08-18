@@ -22,12 +22,11 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-// Observabilidade :: Métricas
+// Observabilidade :: Mï¿½tricas
 var options = new MetricServerOptions
 {
     Port = 9092,
     MapPath = "/metrics",
-    MetricPrefixName = "restserviceserver_"
 };
 
 var metricServer = new MetricServer(options);
@@ -36,13 +35,13 @@ metricServer.Start();
 ICounter _requestsCounter;
 _requestsCounter = Metrics
                       .DefaultFactory
-                      .CreateCounter("grpcserviceserver_requests_total", "Numero total de requisicoes.");
+                      .CreateCounter("requests_total", "Numero total de requisicoes.");
 
 app.MapGet("/weatherforecast/{i}", (int i) =>
 {
     _requestsCounter.Inc(); // Incrementa em 1
 
-    if (i > 1 && i % 50000 == 0)
+    if (i > 1 && i % 5000 == 0)
         Console.WriteLine($"Received {i} requests:{DateTime.Now:HH:mm:ss}");
 
     var forecast = Enumerable.Range(1, 5).Select(index =>

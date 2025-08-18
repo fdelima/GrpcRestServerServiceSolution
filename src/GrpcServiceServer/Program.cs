@@ -17,7 +17,6 @@ var options = new MetricServerOptions
 {
     Port = 9091,
     MapPath = "/metrics",
-    MetricPrefixName = "grpcserviceserver_"
 };
 
 var metricServer = new MetricServer(options);
